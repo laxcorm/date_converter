@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>convertor</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body>
+    <div class="w-screen grid place-items-center">
+        <div class="grid grid-cols-2 gap-y-2 w-1/4">
+            <div class="">Year</div>
+            <input type="text" name="year" class="border border-gray-200 text-5xl">
+            <div>Month</div>
+            <select id="month" class="border border-gray-200 text-3xl" name="month">
+                <option value=1>January</option>
+                <option value=2>February</option>
+                <option value=3>March</option>
+                <option value=4>April</option>
+                <option value=5>May</option>
+                <option value=6>June</option>
+                <option value=7>July</option>
+                <option value=8>August</option>
+                <option value=9>September</option>
+                <option value=10>October</option>
+                <option value=11>November</option>
+                <option value=12>December</option>
+            </select>
+            <span><b>Date</b></span><input type="text" name="day" class=" border border-gray-200 text-5xl">
+            <div>week number</div>
+            <div id="week" class="text-5xl"></div>
+            <span><b>Ordinal</b></span>
+            <input type="text" name="ordinal" class="border border-gray-200 text-5xl">
+        </div>
+    </div>
+    <script src="luxon.js"></script>
+    <script src="converter.js"></script>
+</body>
+
+</html>
