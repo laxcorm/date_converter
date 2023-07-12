@@ -46,11 +46,22 @@ function watchInput() {
 }
 setInterval(watchInput, 500); */
 
-function duerte() {
+/* function duerte() {
   let elem = document.getElementsByTagName("option");
   let text = elem[2].getAttribute("selected");
   let mes = text.innerText; 
   alert(mes);
 }
 
-duerte();
+duerte(); */
+
+/*
+let dateTime = luxon.DateTime;
+let dtm = dateTime.local(2023, 101 );
+alert(dtm.ordinal);
+*/
+let str = "please let me know if it's ok";
+let rgx = /[a-z]+\s/;
+
+let result = str.match(rgx);
+alert(result)

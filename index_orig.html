@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>convertor</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body>
+    <div class="flex">
+        <div class="w-2/6"></div>
+        <div class="w-2/6">
+            <div class="h-150 w-1/2">Year</div>
+            <input type="text" name="year" class="w-1/2 h-30 float-right block">
+            <select id="month" class="w-full" name="month"></select>
+            <span><b>Date</b></span><input type="text" name="day" class="w-3/4">
+            <div class="w-full">
+                <span><b>week number</b></span>
+                <div id="week" class="float-right"></div>
+            </div>
+            <span><b>Ordinal</b></span>
+            <input type="text" name="ordinal">
+        </div>
+        <div class="w-2/6"></div>
+
+    </div>
+    <script src="luxon.js"></script>
+    <script src="converter.js"></script>
+</body>
+
+</html>
