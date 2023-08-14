@@ -18,8 +18,8 @@
                 class="year border border-indigo-300">+</button>
 
             <span><b>Month</b></span>
-            <button class="month border border-indigo-300">-</button><input type="text" name="month"
-                class="text-5xl" disabled="disabled"><button class="month border border-indigo-300">+</button>
+            <button class="month border border-indigo-300">-</button><input type="text" name="month" class="text-5xl"
+                disabled="disabled"><button class="month border border-indigo-300">+</button>
 
             <span><b>Date</b></span><button class="day border border-indigo-300">-</button><input type="text" name="day"
                 class=" border border-gray-200 text-5xl"><button class="day border border-indigo-300">+</button>
@@ -27,13 +27,18 @@
             <div></div>
             <input type="text" name="week" class="text-5xl" disabled="disabled">
             <div></div>
+
+            <div>day of week</div>
+            <div></div>
+            <input type="text" name="weekDay" class="text-3xl" disabled="disabled">
+            <div></div>
+
             <span><b>Ordinal</b></span>
             <button class="ordinal border border-indigo-300">-</button><input type="text" name="ordinal"
                 class="border border-gray-200 text-5xl"><button class="ordinal border border-indigo-300">+</button>
         </div>
     </div>
     <script src="luxon.js"></script>
-    <script src="converter_jq_auto.js"></script>
+    <script src="converter_jq_regex_auto.js"></script>
 </body>
-
 </html>

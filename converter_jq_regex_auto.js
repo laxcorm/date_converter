@@ -1,4 +1,4 @@
-//WITHOUT REGEXP CHECK OF MANUAL INPUT
+//REGEXP CHECK OF MANUAL INPUT
 let dateTime = luxon.DateTime;
 let now = dateTime.now();
 
@@ -27,11 +27,8 @@ $("input[name='week']").val(week);
 $("input[name='weekDay']").val(weekDays[weekDay]);
 $("input[name='ordinal']").val(ordinal);
 
-
-
 function converter(key, data) {
     if (key == 'ordinal') {
-
         let year = data.get('year');
         let ord = data.get('ordinal');
         const ordinalObj = dateTime.fromObject({ year: year, ordinal: ord });
@@ -61,16 +58,22 @@ function converter(key, data) {
     $("input[name='weekDay']").val(weekDays[weekDay]);
 }
 
+let accepted = /^\d+$/;
+
 function checker() {
     data.forEach(
         function (value, key) {
             let input = fromInput(key);
             if (value != input) {
-                if (isNaN(input) || !Number.isInteger(input)) {
+                if (!accepted.test(input)){
                     $("input[name='" + key + "']").val(value);
                     return;
                 }
-                value = switcher(key, input);
+                // if (isNaN(input) || !Number.isInteger(input)) {
+                    // $("input[name='" + key + "']").val(value);
+                    // return;
+                // }
+                value = switcher(key, input);//добавил на случай введения заграничных значений вручную - не с кнопок
                 if (value != input) {
                     if(Array.isArray(value)){
                         let val = value;
@@ -86,49 +89,19 @@ function checker() {
         });
 }
 
-setInterval(checker, 500);
-/*
-function switchYear(direction) {
-    let year = fromInput("year");
-    if (direction == "+") {
-        $("input[name='year']").val(++year);
-        $("input[name='ordinal']").val(1);
-    }
-    if (direction == "-") {
-        $("input[name='year']").val(--year);
-        $("input[name='ordinal']").val(dateTime.local(year).daysInYear);
-    }
-}
-*/
-/* 
-function dateInForm() {
-    let year = Number($("input[name='year']").val());
-    let month = $("input[name='month']").val();
-    month = Number(Object.keys(months).find(key => months[key] === month));
-    let day = Number($("input[name='day']").val());
-    let ordinal = Number($("input[name='ordinal']").val());
-    let date = new Map([
-        ['year', year],
-        ['month', month],
-        ['day', day],
-        ['ordinal', ordinal]
-    ]);
-    return date;
-}
- */
-/* function fromInput(className) {
-    let value;
-    if (className == "month") {
-        let month = $("input[name='month']").val();
-         value = Number(Object.keys(months).find(key => months[key] === month));
-    }
-    else {
-      value = Number($("input[name='" + className + "']").val());
-    }
-    return value;
-} */
+setInterval(checker, 1000);
 
+let regExpRange = {
+    year: /^([1][9][0-9][0-9]|[2][0-1][0-9][0-9]|2200)$/,
+    day:/^([1-9]|[1-2][0-9]|3[0-1])$/,
+    ordinal:/^([1-9]|[1-9][0-9]|[1-3][0-6][0-7])$/,
+};
 
+let regAccepted = {
+    year: /^\d{4}$/,
+    day: /^\d{1,2}$/,
+    day: /^\d{1,3}$/,
+}
 
 
 function fromInput(className) {
@@ -136,20 +109,23 @@ function fromInput(className) {
     if (className == "month") {
         value = Number(Object.keys(months).find(key => months[key] === value));
     }
-      return Number(value);
+    // else {
+    //     if (!regExpRange[className].test(value)) {
+    //         value = data.get(className);
+    //         $("input[name='" + className + "']").val(value);
+    //         return;
+    //     }
+    // }
+    return Number(value);
 }
 
 function switcher(className, value = 0) {
+
+    // if((!regExpRange[className].test(value)) && className != "month") {
+        // value = data.get(className);
+    // }
+
     if (value == 0 || value < 0) {
-        // if(className == "month"){
-        //     value = 12;
-        // }
-        // if(className == "day"){
-        //     value = dateTime.local(fromInput("year"), fromInput("month")).daysInMonth;
-        // }
-        // if(className == "ordinal"){
-        //     value = dateTime.local(fromInput("year")).daysInYear;
-        // }
         switch (className) {
             case "year":
                 value = data.get('year');
@@ -165,6 +141,7 @@ function switcher(className, value = 0) {
                 break;
         }
     }
+    
     if ((value > 12 && className == "month") ||
         (value > dateTime.local(fromInput("year"), fromInput("month")).daysInMonth && className == "day") ||
         (value > dateTime.local(fromInput("year")).daysInYear && className == "ordinal")) {
